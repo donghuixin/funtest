@@ -1,0 +1,6 @@
+.rec { gap: 20rpx; }
+.rec-head { display: flex; gap: 24rpx; align-items: center; }
+.who { flex: 1; }
+.pair { display: flex; justify-content: space-between; padding: 20rpx 0; border-top: 2rpx solid var(--rule); font-size: 28rpx; }
+.score { color: var(--vermilion); font-weight: 600; }
+.empty { align-items: flex-start; }

@@ -1,0 +1,59 @@
+<view class="wrap" wx:if="{{ready}}">
+  <view class="sheet letter">
+    <view class="airmail-top"></view>
+    <view class="greet">见字如面。你需要的友情是——</view>
+    <view class="head">
+      <stamp guest="{{g.id}}" size="md" />
+      <view class="who">
+        <view class="display type">{{g.type}}</view>
+        <view class="name" wx:if="{{g.displayName}}">{{g.displayName}}</view>
+        <view class="tags" style="color:{{g.color}}"><text wx:for="{{g.keywords}}" wx:key="*this" class="tag">{{item}}</text></view>
+      </view>
+    </view>
+    <view class="verdict">{{g.verdict}}</view>
+
+    <view class="section">你的友情人格维度</view>
+    <persona scores="{{scores}}" />
+
+    <view class="section">你需要的友情说明书</view>
+    <view class="para">{{g.need}}</view>
+
+    <view class="{{unlocked ? '' : 'locked'}}">
+      <view class="{{unlocked ? 'deep' : 'deep blur'}}">
+        <view class="section">你的友情盲点</view>
+        <view class="para">{{g.blind}}</view>
+        <view class="section">朋友匹配</view>
+        <view class="matches">
+          <view class="match"><stamp guest="{{healer.id}}" size="sm" /><view><view class="muted">治愈你的朋友</view><view class="display mt">{{healer.type}}</view></view></view>
+          <view class="match"><stamp guest="{{friction.id}}" size="sm" /><view><view class="muted">最需磨合的朋友</view><view class="display mt">{{friction.type}}</view></view></view>
+        </view>
+        <view class="section">给你的相处建议</view>
+        <view class="tip" wx:for="{{g.tips}}" wx:key="*this">{{index + 1}}. {{item}}</view>
+      </view>
+      <view class="unlock-card" wx:if="{{!unlocked}}">
+        <button class="btn btn-seal" hover-class="btn-hover" bindtap="unlockReport">看一段广告，拆开完整的信</button>
+        <view class="muted">盲点、治愈你和最需磨合的朋友、3 条相处建议</view>
+      </view>
+    </view>
+  </view>
+
+  <button class="btn btn-primary" hover-class="btn-hover" open-type="share" bindtap="beforeShare">{{canInvite ? '转发给你的朋友，测测你们的契合度' : '转发给朋友，让 TA 也测一测'}}</button>
+  <view class="invite-off" wx:if="{{!canInvite}}">契合度对比暂时不可用：朋友打开后只能自己测，看不到你们的契合度。</view>
+  <view class="row">
+    <button class="btn btn-ghost btn-sm col" hover-class="btn-hover" bindtap="makePoster">生成结果海报</button>
+    <button class="btn btn-ghost btn-sm col" hover-class="btn-hover" bindtap="again">再测一次</button>
+  </view>
+  <view class="text-link" hover-class="text-link-hover" bindtap="openHistory">打开我的信箱 ›</view>
+  <ad wx:if="{{bannerId && !showPoster}}" unit-id="{{bannerId}}"></ad>
+  <view class="disclaimer">趣味测试 · 非官方出品 · 角色解读基于节目公开内容</view>
+</view>
+
+<canvas type="2d" id="poster" class="offscreen"></canvas>
+<view class="mask" wx:if="{{showPoster}}" bindtap="closePoster" catchtouchmove="noop">
+  <view class="poster-box" catchtap="noop">
+    <image src="{{posterPath}}" mode="aspectFit" show-menu-by-longpress class="poster-img" />
+    <view class="poster-hint">长按图片可直接转发给朋友</view>
+    <button class="btn btn-seal poster-save" hover-class="btn-hover" bindtap="savePoster">保存到相册</button>
+    <view class="poster-close" hover-class="text-link-hover" catchtap="closePoster">关闭</view>
+  </view>
+</view>

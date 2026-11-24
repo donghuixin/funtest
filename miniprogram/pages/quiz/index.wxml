@@ -1,0 +1,56 @@
+<view class="wrap">
+  <block wx:if="{{sealing}}">
+    <view class="sealing">
+      <view class="seal-env"><view class="flap closing"></view><view class="wax pop">期</view></view>
+      <view class="muted">正在封缄你的信…</view>
+    </view>
+  </block>
+
+  <block wx:elif="{{askNickname}}">
+    <view class="sheet">
+      <view class="display ask">在回信上署个名？</view>
+      <view class="muted">寄信的朋友会在回信列表里看到这个名字和你们的契合度，看不到你的嘉宾结果。</view>
+      <input class="nick" type="nickname" placeholder="你的昵称（可不填）" maxlength="12" value="{{nickname}}" bindinput="onNickname" bindblur="onNickname" />
+      <button class="btn btn-primary" hover-class="btn-hover" bindtap="confirmNickname">寄出回信</button>
+      <button class="btn btn-ghost" hover-class="btn-hover" bindtap="skipNickname">不署名，直接寄出</button>
+    </view>
+  </block>
+
+  <block wx:elif="{{interlude}}">
+    <view class="stage">
+      <view class="interlude sheet">
+        <view class="airmail-top"></view>
+        <view class="postmark big">第 {{interlude.at}} 站\n已盖章</view>
+        <view class="hand">{{interlude.title}}</view>
+        <view class="i-line">{{interlude.line}}</view>
+        <view class="i-progress">
+          <view wx:for="{{16}}" wx:key="*this" class="i-dot {{index < interlude.at ? 'on' : ''}}"></view>
+        </view>
+        <view class="muted">已走过 {{interlude.at}} 站 · 还剩 {{16 - interlude.at}} 站</view>
+        <button class="btn btn-primary i-btn" hover-class="btn-hover" bindtap="continueTrip">继续出发</button>
+      </view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="top">
+      <view class="progress"><view wx:for="{{cells}}" wx:key="index" class="cell {{item.on ? 'on' : ''}}" style="{{item.on ? 'background:' + item.color : ''}}"></view></view>
+      <text class="muted">{{mode === 'friend' ? '回信中 · ' : ''}}{{q + 1}} / {{total}}</text>
+    </view>
+    <view wx:for="{{[q]}}" wx:for-item="qi" wx:key="*this" class="postcard sheet slide-in">
+      <view class="postmark pm">第 {{q + 1}} 站\n{{station}}</view>
+      <view class="label">{{place}}</view>
+      <view class="display question">{{text}}</view>
+      <view class="options">
+        <view wx:for="{{options}}" wx:key="value" class="option {{picked === item.value ? 'picked' : ''}}" data-v="{{item.value}}" bindtap="pick" hover-class="option-hover">
+          <text>{{item.text}}</text>
+          <view class="chop">{{item.chop}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="foot">
+      <text class="link" wx:if="{{q > 0}}" bindtap="prev">← 上一站</text><text wx:else></text>
+      <text class="muted">选好后自动前往下一站</text>
+    </view>
+  </block>
+</view>

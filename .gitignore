@@ -1,0 +1,8 @@
+node_modules/
+tests/.build/
+private.*.key
+project.private.config.json
+.DS_Store
+.env
+.env.*
+_site/

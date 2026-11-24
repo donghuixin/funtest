@@ -1,0 +1,23 @@
+.letter { position: relative; overflow: hidden; padding-top: 64rpx; gap: 36rpx; }
+.airmail-top { position: absolute; left: 0; right: 0; top: 0; height: 12rpx; background: repeating-linear-gradient(-45deg, #C8452D 0 20rpx, #FFFDF8 20rpx 40rpx, #1F3A5F 40rpx 60rpx, #FFFDF8 60rpx 80rpx); }
+.greet { font-size: 26rpx; color: var(--muted); letter-spacing: 2rpx; }
+.head { display: flex; gap: 36rpx; align-items: center; }
+.who { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14rpx; }
+.type { font-size: 52rpx; line-height: 1.2; letter-spacing: 2rpx; }
+.name { font-size: 26rpx; color: var(--ink-soft); letter-spacing: 4rpx; }
+.who .tags { margin-top: 6rpx; gap: 12rpx; }
+.verdict { font-family: var(--f-display); font-size: 40rpx; line-height: 1.6; padding: 8rpx 0 8rpx 28rpx; border-left: 6rpx solid var(--vermilion); }
+.deep { display: flex; flex-direction: column; gap: 28rpx; }
+.matches { display: flex; gap: 20rpx; }
+.match { flex: 1; min-width: 0; display: flex; gap: 16rpx; align-items: center; background: var(--white); border: 2rpx solid var(--rule); padding: 20rpx; }
+.mt { font-size: 28rpx; }
+.tip { font-size: 30rpx; line-height: 1.8; padding-left: 8rpx; }
+.offscreen { position: fixed; left: -9999px; top: 0; width: 600px; height: 1200px; }
+.mask { position: fixed; left: 0; right: 0; top: 0; bottom: 0; background: rgba(18,26,38,.92); display: flex; align-items: center; justify-content: center; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+.poster-box { width: 560rpx; display: flex; flex-direction: column; align-items: stretch; gap: 24rpx; }
+.poster-img { width: 560rpx; height: 64vh; background: var(--sheet); box-shadow: 0 30rpx 80rpx -20rpx rgba(0,0,0,.6); }
+.poster-hint { text-align: center; font-size: 22rpx; color: rgba(255,253,248,.6); letter-spacing: 2rpx; }
+.poster-save { margin-top: 8rpx; }
+.poster-close { align-self: center; padding: 16rpx 48rpx; font-size: 28rpx; color: rgba(255,253,248,.85); letter-spacing: 8rpx; }
+
+.invite-off { margin-top: -12rpx; padding: 16rpx 24rpx; font-size: 22rpx; line-height: 1.6; color: var(--vermilion); background: rgba(200,69,45,.06); border: 2rpx dashed rgba(200,69,45,.4); }

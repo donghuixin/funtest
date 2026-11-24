@@ -1,0 +1,6 @@
+<view class="stamp stamp-{{size}}">
+  <view class="face" style="background:{{color}}">
+    <image class="icon" src="/assets/icons/{{icon}}.png" mode="aspectFit" />
+    <text wx:if="{{size !== 'sm'}}" class="val">{{type}}</text>
+  </view>
+</view>

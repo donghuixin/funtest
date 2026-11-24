@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "你的信",
+  "usingComponents": {
+    "stamp": "/components/stamp/index",
+    "persona": "/components/persona/index"
+  }
+}

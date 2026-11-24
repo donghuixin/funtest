@@ -1,0 +1,9 @@
+.stamp { padding: 12rpx; background: radial-gradient(circle at 10rpx 10rpx, #F4EFE6 5rpx, #FFFDF8 6rpx) -10rpx -10rpx / 20rpx 20rpx; flex: none; box-sizing: border-box; }
+.stamp-sm { width: 80rpx; height: 98rpx; padding: 8rpx; background-size: 16rpx 16rpx; background-position: -8rpx -8rpx; background-image: radial-gradient(circle at 8rpx 8rpx, #F4EFE6 4rpx, #FFFDF8 5rpx); }
+.stamp-md { width: 152rpx; height: 186rpx; }
+.stamp-lg { width: 264rpx; height: 322rpx; padding: 18rpx; background-size: 28rpx 28rpx; background-position: -14rpx -14rpx; background-image: radial-gradient(circle at 14rpx 14rpx, #F4EFE6 7rpx, #FFFDF8 8rpx); }
+.face { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 10rpx 6rpx; box-sizing: border-box; position: relative; color: #FFFDF8; }
+.face::after { content: ""; position: absolute; left: 6rpx; right: 6rpx; top: 6rpx; bottom: 6rpx; border: 2rpx solid rgba(255,253,248,.55); }
+.icon { width: 62%; flex: 1; }
+.val { font-size: 18rpx; white-space: nowrap; }
+.stamp-lg .val { font-size: 30rpx; }

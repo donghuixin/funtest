@@ -1,0 +1,11 @@
+.compat { display: flex; flex-direction: column; align-items: center; gap: 8rpx; text-align: center; }
+.num { font-size: 144rpx; line-height: 1; color: var(--vermilion); }
+.pct { font-size: 44rpx; }
+.tier { font-size: 52rpx; }
+.line { color: var(--ink-soft); font-size: 28rpx; }
+.facts { display: flex; flex-direction: column; gap: 20rpx; }
+.fact { background: var(--white); border: 2rpx solid var(--rule); padding: 24rpx 28rpx; display: flex; flex-direction: column; gap: 8rpx; }
+.head { display: flex; gap: 28rpx; align-items: center; }
+.who { flex: 1; min-width: 0; }
+.t { font-size: 44rpx; }
+.verdict { font-family: var(--f-display); font-size: 38rpx; line-height: 1.55; }

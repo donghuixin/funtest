@@ -1,0 +1,10 @@
+<view class="sp-spectra">
+  <view wx:for="{{rows}}" wx:key="name" class="sp-row-item">
+    <view class="sp-name">{{item.name}}</view>
+    <view class="sp-track"><view class="sp-mid"></view><view class="sp-dot" style="left:{{item.pos}}%"></view></view>
+    <view class="sp-ends">
+      <view class="sp-end"><text class="sp-pole">{{item.posWord}}</text><text class="sp-who">{{item.left}}</text></view>
+      <view class="sp-end sp-r"><text class="sp-pole">{{item.negWord}}</text><text class="sp-who">{{item.right}}</text></view>
+    </view>
+  </view>
+</view>

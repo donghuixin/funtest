@@ -1,0 +1,19 @@
+<view class="wrap">
+  <view wx:if="{{loading}}" class="muted">正在取信…</view>
+  <view wx:elif="{{rows.length === 0}}" class="sheet empty">
+    <view class="display">信箱还是空的</view>
+    <view class="muted">测一次，把信转发给朋友，他们的回信会出现在这里。</view>
+    <button class="btn btn-primary" hover-class="btn-hover" bindtap="start">开始测试</button>
+  </view>
+  <view wx:for="{{rows}}" wx:key="id" class="sheet rec">
+    <view class="rec-head" data-id="{{item.id}}" bindtap="openResult">
+      <stamp guest="{{item.guest}}" size="sm" />
+      <view class="who"><view class="display">{{item.type}}</view><view class="muted">{{item.date}} 寄出 · 点开看完整的信</view></view>
+    </view>
+    <view class="label">回信 {{item.pairs.length}} 封</view>
+    <view wx:if="{{item.pairs.length === 0}}" class="muted">还没有朋友回信，去结果页转发给朋友吧。</view>
+    <view wx:for="{{item.pairs}}" wx:for-item="p" wx:key="id" class="pair" data-id="{{p.id}}" bindtap="openPair">
+      <text>{{p.who}}</text><text class="score">{{p.score}}% · {{p.tier}}</text>
+    </view>
+  </view>
+</view>

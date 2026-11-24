@@ -1,0 +1,4 @@
+.center { align-items: center; text-align: center; padding-top: 120rpx; }
+.h { font-size: 46rpx; }
+.muted-text { color: var(--ink-soft); }
+.full { width: 100%; }

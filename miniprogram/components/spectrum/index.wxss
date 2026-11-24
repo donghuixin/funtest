@@ -1,0 +1,12 @@
+.sp-spectra { display: flex; flex-direction: column; }
+.sp-row-item { padding: 28rpx 0 24rpx; border-bottom: 2rpx dashed #D9D0C1; }
+.sp-row-item:last-child { border-bottom: 0; }
+.sp-name { font-size: 28rpx; color: #1F3A5F; font-weight: 600; letter-spacing: 4rpx; }
+.sp-track { position: relative; height: 6rpx; margin: 32rpx 14rpx 20rpx; background: #E6DED0; border-radius: 6rpx; }
+.sp-mid { position: absolute; left: 50%; top: -8rpx; width: 2rpx; height: 22rpx; background: #C9BEAA; }
+.sp-dot { position: absolute; top: 50%; width: 28rpx; height: 28rpx; margin: -14rpx 0 0 -14rpx; border-radius: 50%; background: #C8452D; box-shadow: 0 0 0 6rpx #FBF8F2, 0 4rpx 10rpx 6rpx rgba(200,69,45,.18); }
+.sp-ends { display: flex; justify-content: space-between; }
+.sp-end { display: flex; flex-direction: column; gap: 2rpx; }
+.sp-end.sp-r { align-items: flex-end; }
+.sp-pole { font-size: 24rpx; color: #4A5D78; }
+.sp-who { font-size: 20rpx; color: #8A8A8A; letter-spacing: 2rpx; }

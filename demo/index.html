@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>友情来信 · 你需要什么样的友情</title>
+<meta name="description" content="用 16 个旅途中的小场景，测一测你需要什么样的友情，再把信寄给朋友，看看你们的契合度。">
+<meta property="og:title" content="友情来信 · 你需要什么样的友情">
+<meta property="og:description" content="16 个问题测一测，再寄给朋友看看你们的契合度。">
+<meta name="theme-color" content="#F4EFE6">
+<style>
+:root {
+  --paper: #F4EFE6;
+  --sheet: #FBF8F2;
+  --ink: #1F3A5F;
+  --ink-soft: #4A5D78;
+  --vermilion: #C8452D;
+  --brass: #B08A4A;
+  --muted: #6B6B6B;
+  --rule: #D9D0C1;
+  --white: #FFFDF8;
+  --f-display: "Noto Serif SC", "Songti SC", "STSong", serif;
+  --f-hand: "ZCOOL XiaoWei", "Noto Serif SC", "Kaiti SC", "STKaiti", serif;
+  --f-body: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 16px 40px;
+  background-image: radial-gradient(rgba(31,58,95,.035) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+.demo-note { max-width: 420px; margin: 0 auto 12px; font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.demo-note .btn-link { padding: 0; font-size: 12px; }
+.demo-note b { color: var(--vermilion); font-weight: 600; letter-spacing: .08em; }
+.app { max-width: 420px; margin: 0 auto; position: relative; }
+.screen { display: flex; flex-direction: column; gap: 20px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, .option:focus-visible { outline: 2px solid var(--vermilion); outline-offset: 2px; }
+.btn { border: 0; border-radius: 6px; padding: 14px 18px; font-size: 16px; font-weight: 600; letter-spacing: .04em; }
+.btn-primary { background: var(--ink); color: var(--white); box-shadow: 0 2px 0 rgba(31,58,95,.25); }
+.btn-primary:active { transform: translateY(1px); box-shadow: none; }
+.btn-ghost { background: transparent; border: 1px solid var(--rule); color: var(--ink); font-weight: 500; }
+.btn-seal { background: var(--vermilion); color: var(--white); }
+.btn-link { background: none; border: 0; color: var(--ink-soft); font-size: 14px; padding: 8px; text-decoration: underline; text-underline-offset: 3px; }
+.row { display: flex; gap: 12px; }
+.row > * { flex: 1; min-width: 0; }
+
+/* ---------- Home: the envelope ---------- */
+.envelope { position: relative; background: var(--white); border: 1px solid var(--rule); aspect-ratio: 1.45; max-width: 100%; overflow: hidden; box-shadow: 0 10px 30px -18px rgba(31,58,95,.5); }
+.envelope::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom right, transparent 49.6%, var(--rule) 49.8%, transparent 50.2%), linear-gradient(to bottom left, transparent 49.6%, var(--rule) 49.8%, transparent 50.2%); background-size: 100% 62%; background-repeat: no-repeat; }
+.envelope .airmail { position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: repeating-linear-gradient(-45deg, var(--vermilion) 0 10px, var(--white) 10px 20px, var(--ink) 20px 30px, var(--white) 30px 40px); }
+.envelope .addr { position: absolute; left: 22px; bottom: 30px; font-family: var(--f-hand); font-size: 22px; line-height: 1.5; color: var(--ink); }
+.envelope .addr small { display: block; font-size: 14px; color: var(--muted); font-family: var(--f-body); }
+.envelope .stamp-slot { position: absolute; right: 18px; top: 18px; }
+.envelope .postmark { position: absolute; right: 64px; top: 46px; }
+.home-title { font-family: var(--f-display); font-weight: 700; font-size: 40px; line-height: 1.15; letter-spacing: .08em; margin: 8px 0 0; text-wrap: balance; }
+.home-sub { font-family: var(--f-display); font-size: 18px; margin: 4px 0 0; color: var(--ink-soft); }
+.home-meta { font-size: 13px; color: var(--muted); letter-spacing: .04em; }
+.home-foot { font-size: 12px; color: var(--muted); text-align: center; }
+.stamp-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* ---------- Stamps & postmarks ---------- */
+.stamp { --s: 76px; width: var(--s); height: calc(var(--s) * 1.22); padding: 6px; background: radial-gradient(circle at 5px 5px, var(--paper) 2.6px, var(--white) 3px) -5px -5px / 10px 10px; flex: none; filter: drop-shadow(0 1px 1px rgba(31,58,95,.15)); }
+.stamp .face { width: 100%; height: 100%; background: var(--c); color: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 6px 4px 5px; position: relative; overflow: hidden; }
+.stamp .face::after { content: ""; position: absolute; inset: 3px; border: 1px solid rgba(255,253,248,.55); pointer-events: none; }
+.stamp svg { width: 62%; height: auto; flex: 1; }
+.stamp .val { font-family: var(--f-display); font-size: calc(var(--s) * .12); letter-spacing: .02em; white-space: nowrap; }
+.stamp.sm { --s: 40px; padding: 4px; background-size: 8px 8px; background-position: -4px -4px; background-image: radial-gradient(circle at 4px 4px, var(--paper) 2px, var(--white) 2.4px); }
+.stamp.sm .val { display: none; }
+.stamp.lg { --s: 132px; padding: 9px; background-size: 14px 14px; background-position: -7px -7px; background-image: radial-gradient(circle at 7px 7px, var(--paper) 3.6px, var(--white) 4px); }
+.postmark { width: 74px; height: 74px; border: 2px solid var(--vermilion); border-radius: 50%; color: var(--vermilion); display: grid; place-items: center; text-align: center; font-size: 11px; line-height: 1.3; transform: rotate(-12deg); opacity: .88; font-weight: 600; letter-spacing: .04em; }
+.postmark::before { content: ""; position: absolute; width: 60px; height: 60px; border: 1px solid var(--vermilion); border-radius: 50%; }
+.postmark { position: relative; }
+
+/* ---------- Quiz: postcards ---------- */
+.quiz-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.progress { display: grid; grid-template-columns: repeat(8, 14px); gap: 4px; }
+.progress i { width: 14px; height: 17px; border: 1px dashed var(--rule); background: transparent; display: block; }
+.progress i.on { border: 0; background: var(--c, var(--brass)); box-shadow: 0 0 0 2px var(--white); }
+.postcard { background: var(--sheet); border: 1px solid var(--rule); padding: 22px 20px 20px; position: relative; box-shadow: 0 10px 30px -20px rgba(31,58,95,.6); }
+.postcard .pm-mini { position: absolute; right: 14px; top: -18px; width: 66px; height: 66px; font-size: 10px; background: var(--sheet); }
+.postcard .pm-mini::before { width: 54px; height: 54px; }
+.place { font-size: 13px; color: var(--vermilion); letter-spacing: .1em; font-weight: 600; }
+.question { font-family: var(--f-display); font-weight: 700; font-size: 24px; line-height: 1.5; margin: 10px 0 18px; text-wrap: balance; padding-right: 48px; }
+.options { display: flex; flex-direction: column; }
+.option { text-align: left; background: none; border: 0; border-bottom: 1px solid var(--rule); padding: 14px 40px 14px 2px; font-size: 16px; color: var(--ink); position: relative; line-height: 1.5; }
+.option:first-child { border-top: 1px solid var(--rule); }
+.option .chop { position: absolute; right: 4px; top: 50%; width: 28px; height: 28px; margin-top: -14px; border: 2px solid var(--vermilion); border-radius: 4px; color: var(--vermilion); font-family: var(--f-display); font-size: 14px; display: grid; place-items: center; opacity: 0; transform: scale(1.6) rotate(-8deg); }
+.option.picked { color: var(--ink); font-weight: 600; }
+.option.picked .chop { opacity: 1; transform: scale(1) rotate(-8deg); transition: transform .12s ease-out, opacity .08s; }
+.quiz-foot { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted); }
+.slide-in { animation: slideIn .26s ease-out; }
+@keyframes slideIn { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.interlude { text-align: center; padding: 48px 20px; background: var(--sheet); border: 1px solid var(--rule); display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.interlude h2 { font-family: var(--f-hand); font-weight: 400; font-size: 28px; margin: 0; }
+.interlude p { margin: 0; color: var(--muted); }
+
+/* ---------- Sealing ---------- */
+.sealing { min-height: 420px; display: grid; place-items: center; text-align: center; }
+.seal-env { width: 240px; aspect-ratio: 1.45; background: var(--white); border: 1px solid var(--rule); position: relative; margin: 0 auto 24px; box-shadow: 0 10px 30px -18px rgba(31,58,95,.5); }
+.seal-env .flap { position: absolute; left: 0; right: 0; top: 0; height: 60%; background: var(--sheet); clip-path: polygon(0 0, 100% 0, 50% 100%); border-bottom: 1px solid var(--rule); transform-origin: top; animation: flapClose .6s .2s ease-in forwards; transform: rotateX(180deg); }
+.seal-env .wax { position: absolute; left: 50%; top: 60%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: var(--vermilion); color: var(--white); display: grid; place-items: center; font-family: var(--f-display); font-size: 18px; transform: scale(0); animation: wax .3s .85s ease-out forwards; box-shadow: inset 0 0 0 4px rgba(0,0,0,.12); }
+@keyframes flapClose { to { transform: rotateX(0); } }
+@keyframes wax { 60% { transform: scale(1.25); } to { transform: scale(1); } }
+
+/* ---------- Result: the letter ---------- */
+.letter { background: var(--sheet); border: 1px solid var(--rule); padding: 26px 22px; display: flex; flex-direction: column; gap: 18px; background-image: linear-gradient(var(--sheet) 31px, rgba(217,208,193,.45) 32px); background-size: 100% 32px; box-shadow: 0 10px 30px -20px rgba(31,58,95,.6); }
+.letter .salute { font-size: 14px; color: var(--muted); }
+.result-head { display: flex; gap: 18px; align-items: flex-start; }
+.result-head .who { min-width: 0; }
+.result-type { font-family: var(--f-display); font-weight: 700; font-size: 30px; line-height: 1.2; margin: 2px 0 6px; }
+.result-name { font-size: 15px; color: var(--ink-soft); letter-spacing: .1em; }
+.verdict { font-family: var(--f-hand); font-size: 24px; line-height: 1.55; margin: 0; color: var(--ink); }
+.tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag { font-size: 12px; border: 1px solid var(--c); color: var(--c); padding: 2px 10px; border-radius: 999px; letter-spacing: .06em; background: var(--white); }
+.section-label { font-size: 12px; color: var(--vermilion); letter-spacing: .16em; font-weight: 600; }
+.spectra { display: flex; flex-direction: column; gap: 14px; background: var(--white); border: 1px solid var(--rule); padding: 16px 14px; }
+.spec-top { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+.spec-top b { color: var(--ink); font-weight: 600; }
+.track { position: relative; height: 10px; margin-top: 6px; background: repeating-linear-gradient(90deg, var(--rule) 0 6px, transparent 6px 10px); background-size: 100% 2px; background-repeat: repeat-x; background-position: 0 4px; }
+.track .mid { position: absolute; left: 50%; top: 0; width: 1px; height: 10px; background: var(--rule); }
+.track .dot { position: absolute; top: -3px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--vermilion); box-shadow: 0 0 0 3px var(--white); }
+.track .dot.b { background: var(--ink); }
+.spec-ends { display: flex; justify-content: space-between; font-size: 12px; margin-top: 6px; color: var(--ink-soft); }
+.para { margin: 0; font-size: 15px; line-height: 2.13; }
+.locked { position: relative; }
+.locked .blur { filter: blur(5px); user-select: none; pointer-events: none; }
+.unlock-card { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; background: linear-gradient(rgba(251,248,242,.3), rgba(251,248,242,.95) 40%); padding: 16px; }
+.unlock-card p { margin: 0; font-size: 13px; color: var(--muted); }
+.match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.match { background: var(--white); border: 1px solid var(--rule); padding: 12px; display: flex; gap: 10px; align-items: center; min-width: 0; }
+.match small { display: block; font-size: 11px; color: var(--muted); letter-spacing: .08em; }
+.match b { font-family: var(--f-display); font-size: 15px; display: block; }
+.match span { font-size: 12px; color: var(--ink-soft); }
+.tips { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 6px; }
+.disclaimer { font-size: 11px; color: var(--muted); text-align: center; }
+
+/* ---------- Invite & pair ---------- */
+.sealed { text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center; }
+.sealed .seal-env .flap { animation: none; transform: none; }
+.sealed .seal-env .wax { animation: none; transform: none; }
+.sealed h2 { font-family: var(--f-display); font-size: 24px; margin: 0; }
+.sealed p { margin: 0; color: var(--muted); }
+.compat { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.compat .num { font-family: var(--f-display); font-weight: 700; font-size: 72px; line-height: 1; color: var(--vermilion); font-variant-numeric: tabular-nums; }
+.compat .num sup { font-size: 24px; }
+.compat .tier { font-family: var(--f-hand); font-size: 26px; }
+.compat .line { color: var(--ink-soft); font-size: 14px; max-width: 28em; }
+.pair-facts { display: flex; flex-direction: column; gap: 10px; }
+.fact { background: var(--white); border: 1px solid var(--rule); padding: 12px 14px; }
+.fact small { color: var(--vermilion); font-size: 12px; letter-spacing: .1em; font-weight: 600; }
+.fact p { margin: 4px 0 0; }
+
+/* ---------- Overlays ---------- */
+.overlay { position: fixed; inset: 0; background: rgba(20,28,40,.72); display: grid; place-items: center; z-index: 20; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); overflow-y: auto; }
+.sheet { background: var(--sheet); width: 100%; max-width: 380px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.ad-box { background: #10161F; color: #E8E4DC; aspect-ratio: 16/10; display: grid; place-items: center; text-align: center; font-size: 13px; letter-spacing: .1em; }
+.ad-box b { display: block; font-size: 32px; font-variant-numeric: tabular-nums; margin-top: 6px; }
+.share-preview { background: var(--white); border: 1px solid var(--rule); border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.share-preview .t { font-size: 14px; font-weight: 600; }
+.share-preview .img { aspect-ratio: 5/4; background: var(--paper); display: grid; place-items: center; }
+.share-preview .img .seal-env { width: 70%; margin: 0; }
+.share-preview .from { font-size: 11px; color: var(--muted); }
+.poster { background: var(--sheet); border: 1px solid var(--rule); padding: 22px 18px; display: flex; flex-direction: column; gap: 14px; aspect-ratio: 3/4; max-width: 100%; position: relative; overflow: hidden; }
+.poster .qr { position: absolute; right: 14px; bottom: 14px; width: 64px; height: 64px; font-size: 9px; }
+.poster .qr::before { width: 52px; height: 52px; }
+.hint { font-size: 12px; color: var(--muted); text-align: center; }
+.share-url { width: 100%; font: inherit; font-size: 13px; color: var(--ink-soft); background: var(--white); border: 1px solid var(--rule); border-radius: 6px; padding: 10px 12px; }
+.poster .ps-radar { width: 100%; height: auto; }
+.poster { aspect-ratio: auto; }
+.poster-foot { font-size: 12px; color: var(--muted); text-align: center; letter-spacing: .1em; }
+/* ---------- 友情人格维度 ---------- */
+.ps { display: flex; flex-direction: column; }
+.ps-radar { width: 100%; height: auto; display: block; font-family: var(--f-display); }
+.ps-note { text-align: center; font-size: 11px; color: var(--muted); letter-spacing: .06em; }
+.ps-bars { margin-top: 16px; background: var(--white); border: 1px solid var(--rule); padding: 4px 16px; }
+.ps-bar-row { padding: 12px 0; border-bottom: 1px dashed var(--rule); }
+.ps-bar-row:last-child { border-bottom: 0; }
+.ps-bar-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.ps-name { font-size: 14px; font-weight: 600; letter-spacing: .1em; }
+.ps-level { font-size: 12px; color: var(--vermilion); }
+.ps-bar { position: relative; height: 7px; margin: 10px 0 7px; background: #E6DED0; border-radius: 7px; overflow: hidden; }
+.ps-bar-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); }
+.ps-bar-mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--sheet); }
+.ps-bar-ends { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+.ps-on { color: var(--ink); font-weight: 600; }
+.ps-read { padding-top: 16px; }
+.ps-read-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.ps-read-name { font-family: var(--f-display); font-size: 16px; font-weight: 700; }
+.ps-chip { font-size: 11px; color: var(--vermilion); border: 1px solid var(--vermilion); border-radius: 3px; padding: 0 6px; }
+.ps-read-text { margin: 0; font-size: 14px; line-height: 1.9; color: var(--ink-soft); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .seal-env .flap { transform: none; } .seal-env .wax { transform: none; } }
+</style>
+</head>
+<body>
+
+<div class="demo-note"><span><b>友情来信</b> · 网页版</span><button class="btn-link" id="reset-btn" type="button">从头开始</button></div>
+<main class="app" id="app" aria-live="polite"></main>
+<div id="overlay-root"></div>
+
+<script>
+const C = {"axes":[{"id":0,"name":"亲密深度","pos":"深度绑定","neg":"独立留白","gap":"一个想要同进同退，一个需要各自留白"},{"id":1,"name":"关心方式","pos":"热情拉动","neg":"边界疏离","gap":"一个想靠近，一个需要空间"},{"id":2,"name":"安全感来源","pos":"感性依赖","neg":"理性清算","gap":"一个看重态度和陪伴，一个看重公平和对等"},{"id":3,"name":"相处节奏","pos":"严苛共进","neg":"自由松弛","gap":"一个想一起变好，一个想一起放松"}],"poles":[["xufei","lina"],["zhangmeng","matianyu"],["wangzixuan","wenjier"],["qingzhi","baixiaochun"]],"questions":[{"place":"出发前 · 行程单","axis":0,"text":"好友提议这次旅行全程一起，住同一间房、每顿饭都一起吃。","options":[{"text":"太好了，形影不离才叫一起旅行","value":2},{"text":"大部分时间一起，偶尔分开也行","value":1},{"text":"各自订房，白天再汇合","value":-1},{"text":"各自安排行程，想见面就约","value":-2}]},{"place":"抵达 · 低气压","axis":1,"text":"好友一路都闷闷不乐，你看在眼里。","options":[{"text":"拉对方去吃好吃的、安排点活动，把情绪带起来","value":2},{"text":"主动问一句「怎么了，需要我做什么？」","value":1},{"text":"递瓶水，陪着，不追问","value":-1},{"text":"给对方空间，想说自然会说","value":-2}]},{"place":"饭桌 · 买单","axis":2,"text":"一起吃饭，好友总是抢着买单。","options":[{"text":"心里暖，朋友之间不用算这些","value":2},{"text":"记在心里，下次找机会请回来","value":1},{"text":"提议以后 AA，大家都轻松","value":-1},{"text":"会有点不安，宁愿每次算清楚","value":-2}]},{"place":"行程 · 目标","axis":3,"text":"这趟旅行，你更想和好友怎么玩？","options":[{"text":"定好计划，一起完成一个挑战，比如登顶、打卡清单","value":2},{"text":"有个大致目标，边走边调整","value":1},{"text":"随走随停，玩得开心就好","value":-1},{"text":"完全不做计划，想去哪就去哪","value":-2}]},{"place":"车站 · 站队","axis":0,"text":"好友和另一位朋友吵起来了，群里都在等你表态。","options":[{"text":"不问对错，先站好友这边","value":2},{"text":"私下先安慰好友，再慢慢了解情况","value":1},{"text":"两边都听听，不急着表态","value":-1},{"text":"这是他们之间的事，我不参与","value":-2}]},{"place":"雨天 · 病倒","axis":1,"text":"旅途中你发烧了，你希望好友怎么做？","options":[{"text":"直接冲过来照顾，买药订餐全包","value":2},{"text":"问清楚我需要什么，再帮我安排","value":1},{"text":"发消息问候，把药放在门口","value":-1},{"text":"让我一个人睡一觉就好，别担心","value":-2}]},{"place":"合照 · 新朋友","axis":2,"text":"好友这次带了一个你不认识的新朋友，两人聊得很热络。","options":[{"text":"有点失落，我希望自己是他最重要的那个","value":2},{"text":"嘴上说没事，但希望他多照顾我的感受","value":1},{"text":"只要他对我的态度没变就好","value":-1},{"text":"交朋友是他的自由，关系好坏看平时怎么相处","value":-2}]},{"place":"镜头 · 直言","axis":3,"text":"好友的作品有明显问题，他却很满意。","options":[{"text":"直说问题，并帮他一起改，真朋友就该这样","value":2},{"text":"先肯定，再委婉提建议","value":1},{"text":"他开心就好，除非他来问我","value":-1},{"text":"我不评价朋友的工作，那是他的事","value":-2}]},{"place":"深夜 · 秘密","axis":0,"text":"好友把一个连家人都不知道的秘密告诉了你，希望你也说一个。","options":[{"text":"当然，我们之间不该有秘密","value":2},{"text":"说一个我愿意说的，慢慢来","value":1},{"text":"谢谢信任，但我的秘密想先留着","value":-1},{"text":"有点压力，交换秘密不应该是必须的","value":-2}]},{"place":"地图 · 被安排","axis":1,"text":"好友热心地帮你规划了未来半年的学习和工作计划。","options":[{"text":"很感动，被人这么上心太难得了","value":2},{"text":"挺好，挑有用的部分采纳","value":1},{"text":"心意领了，但我的事想自己决定","value":-1},{"text":"有点被冒犯，感觉边界被越过了","value":-2}]},{"place":"争执 · 和好","axis":2,"text":"你和好友吵了一架，你更希望怎样和好？","options":[{"text":"他先来哄我、表个态，道理以后再说","value":2},{"text":"彼此说句软话，抱一下就过去","value":1},{"text":"坐下来把事情说清楚，谁的问题谁认","value":-1},{"text":"把来龙去脉摆出来，定个规矩以后别再犯","value":-2}]},{"place":"山顶 · 搭档","axis":3,"text":"好友邀请你一起创业，或者一起做一个项目。","options":[{"text":"太好了，最好的朋友就是最好的战友","value":2},{"text":"可以试试，正好互相督促一起成长","value":1},{"text":"更想把友情和工作分开","value":-1},{"text":"不了，和朋友一起工作容易变味","value":-2}]},{"place":"岔路 · 机会","axis":0,"text":"你有一个很好的机会，但接受它可能会影响好友的利益。","options":[{"text":"先和好友商量，他不同意我就放弃","value":2},{"text":"告诉好友，尽量找两全的办法","value":1},{"text":"先保护好自己的发展，事后真诚解释","value":-1},{"text":"各自的路各自走，好朋友应该理解","value":-2}]},{"place":"信号 · 联系频率","axis":1,"text":"你最舒服的朋友联系频率是？","options":[{"text":"每天都要聊，分享鸡毛蒜皮","value":2},{"text":"每周聊几次，有事随时找","value":1},{"text":"有事才联系，没事各自安好","value":-1},{"text":"很久不联系也不影响感情","value":-2}]},{"place":"账本 · 付出","axis":2,"text":"你发现这些年你为好友做的，好像比他为你做的多。","options":[{"text":"没关系，只要他心里有我就好","value":2},{"text":"有点委屈，希望他能说一句「辛苦了」","value":1},{"text":"找机会坦白聊聊，希望关系更对等","value":-1},{"text":"慢慢收回付出，直到双方平衡","value":-2}]},{"place":"终点 · 后会有期","axis":3,"text":"旅行结束，给这段友情的下一章写一句开场白。","options":[{"text":"「下一站，我们一起变得更好。」","value":2},{"text":"「互相督促，明年见到更好的彼此。」","value":1},{"text":"「不管走多远，想你了就来找你。」","value":-1},{"text":"「各自自由，有空再一起疯。」","value":-2}]}],"guests":{"xufei":{"name":"许飞","type":"共生型密友","group":"飞雪CP","color":"#A63D40","icon":"key","verdict":"你要的不是朋友，是一个永远站在你这边的人。","keywords":["重情","念旧","同一阵线"],"need":"你需要毫无保留的深度绑定：情绪持续同频，关键时刻对方不问对错地站在你身边。","blind":"对方一旦有所保留，你容易感到被背叛，然后把自己封闭起来。","tips":["把「你为什么不站我这边」换成「我现在需要你站在我这边」。","允许朋友有一两个你不知道的角落，那不等于背叛。","受伤时先把感受说出来，再决定要不要关上门。"]},"lina":{"name":"厉娜","type":"留白型伙伴","group":"飞雪CP","color":"#6A89A7","icon":"umbrella","verdict":"最好的关系，是各自站稳，再并肩。","keywords":["清醒","体面","各自独立"],"need":"你需要彼此尊重空间和边界的关系：真诚不伤人，但不要求同进同退。","blind":"你「先保护好自己」的习惯，容易被重情的朋友误读成疏远或不在乎。","tips":["偶尔主动说一句「我其实很在乎你」，留白才不会被误读成冷淡。","需要避开风险时，先和朋友打个招呼。","给重情的朋友一个固定的见面节奏，让对方安心。"]},"zhangmeng":{"name":"张萌","type":"高浓度互助","group":"萌马组合","color":"#D98A2B","icon":"teapot","verdict":"认定了你，就是百分之百。","keywords":["热忱","主动","共同向上"],"need":"你给出全部，也希望对方热烈回应、互相扶持、一起变好。","blind":"你的热情介入有时会压到需要安静的朋友，对方一后退，你就很受伤。","tips":["帮忙之前先问一句「你需要我做什么？」","对方回应得慢，不代表不在乎。","把一部分热情留给自己。"]},"matianyu":{"name":"马天宇","type":"低负担舒适区","group":"萌马组合","color":"#7FA99B","icon":"cup","verdict":"知道你在，但别打扰。","keywords":["温和","分寸","君子之交"],"need":"你需要不施压、不捆绑的安全距离，很久不联系也不影响感情。","blind":"你的疏离感可能让在乎你的人不敢靠近，过度热情又会触发你的防御。","tips":["告诉朋友「我不常联系，但一直都在」。","被关心时先说谢谢，再说你需要多少空间。","偶尔主动一次，对方会记很久。"]},"wangzixuan":{"name":"王子璇","type":"排他性陪伴","group":"闺蜜组","color":"#D9A5A0","icon":"pair","verdict":"你想做某个人心里的唯一。","keywords":["感性","操心","唯一感"],"need":"你需要日常陪伴和情绪价值，冲突时先看态度再讲道理，被真诚地包容。","blind":"你对评价很敏感、容易自责，也会因为朋友有了新朋友而不安。","tips":["把「我是不是不重要了」直接说出来。","朋友有新朋友时，约一次只属于你们的见面。","别人的一句评价，不必全盘接收。"]},"wenjier":{"name":"文吉儿","type":"权责清晰型","group":"闺蜜组","color":"#2E4A7D","icon":"scale","verdict":"账算清楚了，心才能放下。","keywords":["直接","公平","规则对等"],"need":"你需要规则对等、账目分明、付出有来有回的公平关系。","blind":"你习惯用证据确认关系，一旦觉得不对等就会强势抽离，让对方措手不及。","tips":["账可以算，也说说算账背后的不安。","抽离之前，给对方一次解释的机会。","有时先多付出一点，看看关系怎么回应。"]},"qingzhi":{"name":"青稚","type":"目标同频型","group":"双子星","color":"#4F7A4B","icon":"summit","verdict":"最好的朋友，是一起变好的战友。","keywords":["目标感","努力","坦率"],"need":"你需要一起拼搏、互相督促、坦率沟通且能互补的战友。","blind":"你的「为你好」可能让朋友感到被要求；你不太会拒绝，冲突时又容易焦虑。","tips":["提建议前先问「你想听意见，还是想被支持？」","冲突时可以说「我需要想一想」。","允许朋友按自己的节奏变好。"]},"baixiaochun":{"name":"白小纯","type":"无干涉默契型","group":"双子星","color":"#8DB8D8","icon":"headphones","verdict":"陪我玩，别管我。","keywords":["随性","义气","嘴硬心软"],"need":"你需要工作和生活分开、不说教不控制、能接住你情绪的纯粹玩伴。","blind":"你习惯用嘴硬掩饰敏感，朋友很难看出你什么时候真的需要他。","tips":["嘴硬之后，补一句真话。","告诉朋友哪些话题你不想被说教。","需要人陪的时候，直接发一句「在吗」。"]}},"tiers":[{"min":85,"name":"天生同频","line":"你们对友情的期待几乎一样，很少需要解释。"},{"min":65,"name":"默契搭档","line":"大方向一致，小地方各有习惯，相处起来很省心。"},{"min":45,"name":"需要磨合","line":"你们在意的东西不太一样，说清楚就能走得更远。"},{"min":0,"name":"互补型","line":"你们很不一样，正好能补上对方没有的那一块。"}]};
+const ICONS = {
+  key: '<circle cx="22" cy="32" r="9"/><path d="M31 32h23M46 32v8M52 32v6"/>',
+  umbrella: '<path d="M10 34Q32 6 54 34Z"/><path d="M32 34v18q0 5-5 5"/>',
+  teapot: '<ellipse cx="30" cy="38" rx="14" ry="11"/><path d="M44 36l10-6M16 32q-8 6 0 12M24 26h12M30 20q3-4 0-8"/>',
+  cup: '<path d="M18 26h26v14q0 10-13 10t-13-10z"/><path d="M44 30q8 0 8 6t-8 6M26 20q2-4 0-8M34 20q2-4 0-8"/>',
+  pair: '<circle cx="24" cy="28" r="7"/><circle cx="40" cy="28" r="7"/><path d="M12 54q12-16 24 0M28 54q12-16 24 0"/>',
+  scale: '<path d="M32 12v38M14 20h36M14 20l-6 14h12zM50 20l-6 14h12zM22 50h20"/>',
+  summit: '<path d="M8 52L28 20l12 18 6-8 12 22z"/><path d="M28 20V10l8 3-8 3"/>',
+  headphones: '<path d="M16 40v-6a16 16 0 0 1 32 0v6"/><rect x="12" y="38" width="8" height="14" rx="3"/><rect x="44" y="38" width="8" height="14" rx="3"/>'
+};
+const ORDERS = [[0,2,1,3],[2,0,3,1],[1,3,0,2],[3,1,2,0]];
+const CHOPS = ['友','情','来','信'];
+const STORE_KEY = 'friendship-letter:me';
+const app = document.getElementById('app');
+const overlayRoot = document.getElementById('overlay-root');
+
+let S = freshState();
+function freshState() {
+  return { mode: 'self', q: 0, answers: [], interludeShown: {}, me: null, owner: null, friend: null, pair: null };
+}
+function esc(s) { return String(s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch])); }
+
+/* ---------- scoring (same logic as core/scoring.ts) ---------- */
+function axisScores(answers) { const s = [0,0,0,0]; answers.forEach(a => { if (a) s[a.axis] += a.value; }); return s; }
+function matchGuest(answers) {
+  const s = axisScores(answers), strong = [0,0,0,0], last = [-1,-1,-1,-1];
+  answers.forEach(a => { if (!a) return; if (Math.abs(a.value) === 2) strong[a.axis]++; last[a.axis] = Math.max(last[a.axis], a.q); });
+  const order = [0,1,2,3].sort((x, y) => Math.abs(s[y]) - Math.abs(s[x]) || strong[y] - strong[x] || last[y] - last[x]);
+  const side = (ax, same) => C.poles[ax][(s[ax] >= 0) === same ? 0 : 1];
+  return { scores: s, guest: side(order[0], true), healer: side(order[1], true), friction: side(order[0], false) };
+}
+function compat(a, b) {
+  const gaps = a.map((v, i) => Math.abs(v - b[i]));
+  const score = Math.round(100 - gaps.reduce((t, g) => t + g, 0) / 64 * 100);
+  const tier = C.tiers.find(t => score >= t.min);
+  return { score, tier, gaps, closestAxis: gaps.indexOf(Math.min(...gaps)), farthestAxis: gaps.indexOf(Math.max(...gaps)) };
+}
+
+/* ---------- share links: no server, the four scores ride in the URL ----------
+   ?i=CODE  a sealed letter from a friend (their scores; the page never shows their guest)
+   ?p=CODE  a reply carrying both people's scores, so the sender sees the same 契合度 */
+const ALPHA = 'k3m9qx7bf2wtz5hnp'; // 17 symbols for -8..8
+function encScores(s) {
+  const body = s.map((v, i) => ALPHA[(Math.max(-8, Math.min(8, v)) + 8 + i * 5) % 17]).join('');
+  const sum = s.reduce((t, v, i) => t + (v + 8) * (i + 3), 0);
+  return body + ALPHA[sum % 17];
+}
+function decScores(code) {
+  if (!code || code.length !== 5) return null;
+  const s = [];
+  for (let i = 0; i < 4; i++) {
+    const k = ALPHA.indexOf(code[i]);
+    if (k < 0) return null;
+    s.push(((k - i * 5) % 17 + 17) % 17 - 8);
+  }
+  return encScores(s) === code ? s : null;
+}
+function baseUrl() { return location.origin + location.pathname; }
+function inviteUrl(scores) { return `${baseUrl()}?i=${encScores(scores)}`; }
+function replyUrl(owner, friend) { return `${baseUrl()}?p=${encScores(owner)}${encScores(friend)}`; }
+function resultFromScores(scores) {
+  // 只有分数时也能还原结果：用分数构造一组等价答案
+  const answers = [];
+  scores.forEach((v, axis) => { let left = v; for (let k = 0; k < 4; k++) { const step = Math.max(-2, Math.min(2, left)) || 1; answers.push({ q: answers.length, axis, value: step }); left -= step; } });
+  return matchGuest(answers);
+}
+function saveMe(r) { try { localStorage.setItem(STORE_KEY, JSON.stringify(r)); } catch (e) {} }
+function loadMe() { try { const r = JSON.parse(localStorage.getItem(STORE_KEY)); return r && r.scores && C.guests[r.guest] ? r : null; } catch (e) { return null; } }
+
+/* ---------- 友情人格维度 (same as core/dimensions.ts) ---------- */
+const READINGS = [
+  ['你想要的朋友，是能把日常摊开来分享的人。一起吃饭、一起吐槽、一起计划下一次见面，这种「我们是一伙的」感觉会让你踏实。',
+   '你珍惜各自有空间的友情。不必天天联系，见面时依然熟络。对你来说，好朋友是能放心让彼此走远一点的人。',
+   '你在靠近和留白之间切换得很自然。热闹时能陪着，安静时也不觉得被冷落，你看重的是相处舒服，而不是距离远近。'],
+  ['你表达关心的方式很直接：主动约、主动问、主动拉朋友一把。你也希望这份热情能被回应，而不是总等你先开口。',
+   '你的关心有分寸。不追着问，也不替别人做决定，只在对方需要时稳稳地出现。你也希望朋友同样尊重你的边界。',
+   '你会看情况决定要不要往前一步。朋友低落时你会主动些，朋友想静一静时你也懂得退后，这份分寸感让人放松。'],
+  ['让你安心的是态度和陪伴：一句及时的回复、一件被记住的小事，比什么都重要。你需要感觉到自己被放在心上。',
+   '让你安心的是公平和清楚：账算明白，约定说到做到，付出大致对等。规则清晰了，你才能放心把心交出去。',
+   '你既在意心意，也在意分寸。朋友的陪伴让你温暖，彼此说清楚、做到位，也让你觉得这段关系靠得住。'],
+  ['你喜欢能一起变好的朋友：互相督促、互相提要求，在彼此身上看到进步。好的友情对你来说带着一点向上的力气。',
+   '你喜欢和朋友一起放松。不用表现，不用较劲，待在一起就很舒服。友情对你来说，是能卸下力气的地方。',
+   '你能跟朋友一起拼，也能一起躺。该认真时认真，该松弛时松弛，节奏跟着彼此的状态走。'],
+];
+function toDims(scores) {
+  return C.axes.map((ax, i) => {
+    const s = Math.max(-8, Math.min(8, scores[i] || 0));
+    const posPct = Math.round((s + 8) / 16 * 100), negPct = 100 - posPct;
+    const lead = Math.abs(s) <= 1 ? 'mid' : s > 0 ? 'pos' : 'neg';
+    const leadWord = lead === 'pos' ? ax.pos : lead === 'neg' ? ax.neg : '均衡';
+    const abs = Math.abs(s);
+    return {
+      name: ax.name, posWord: ax.pos, negWord: ax.neg, posPct, negPct, lead, leadWord,
+      leadPct: lead === 'mid' ? Math.max(posPct, negPct) : lead === 'neg' ? negPct : posPct,
+      strength: abs / 8,
+      levelText: lead === 'mid' ? '两端很均衡' : `${abs >= 5 ? '明显' : '略微'}偏向「${leadWord}」`,
+      text: READINGS[i][lead === 'pos' ? 0 : lead === 'neg' ? 1 : 2],
+    };
+  });
+}
+function radarSVG(dims) {
+  const W = 340, H = 290, cx = W / 2, cy = H / 2 + 4, r = 84;
+  const ang = [-Math.PI / 2, 0, Math.PI / 2, Math.PI];
+  const pt = (k, f) => [cx + Math.cos(ang[k]) * r * f, cy + Math.sin(ang[k]) * r * f];
+  const poly = f => [0,1,2,3].map(k => pt(k, typeof f === 'function' ? f(k) : f).map(n => n.toFixed(1)).join(',')).join(' ');
+  const grid = [0.25, 0.5, 0.75, 1].map((f, gi) => `<polygon points="${poly(f)}" fill="none" stroke="#D9D0C1" ${gi < 3 ? 'stroke-dasharray="4 4"' : ''}/>`).join('');
+  const spokes = [0,1,2,3].map(k => { const [x, y] = pt(k, 1); return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#D9D0C1"/>`; }).join('');
+  const vals = dims.map(d => 0.14 + 0.86 * d.strength);
+  const dots = vals.map((v, k) => { const [x, y] = pt(k, v); return `<circle cx="${x}" cy="${y}" r="4" fill="#C8452D"/>`; }).join('');
+  const gap = 14;
+  const lab = [
+    { x: cx, y: cy - r - gap - 20, a: 'middle' }, { x: cx + r + gap, y: cy - 8, a: 'start' },
+    { x: cx, y: cy + r + gap + 12, a: 'middle' }, { x: cx - r - gap, y: cy - 8, a: 'end' },
+  ];
+  const labels = dims.map((d, k) => { const L = lab[k];
+    return `<text x="${L.x}" y="${L.y}" text-anchor="${L.a}" fill="#1F3A5F" font-weight="700" font-size="15">${esc(d.name)}</text>
+      <text x="${L.x}" y="${L.y + 20}" text-anchor="${L.a}" fill="${d.lead === 'mid' ? '#6B6B6B' : '#C8452D'}" font-size="13">${esc(d.lead === 'mid' ? '两端均衡' : d.leadWord + ' ' + d.leadPct + '%')}</text>`; }).join('');
+  return `<svg class="ps-radar" viewBox="0 0 ${W} ${H}" role="img" aria-label="友情人格维度雷达图">${grid}${spokes}
+    <polygon points="${poly(k => vals[k])}" fill="rgba(200,69,45,.16)" stroke="#C8452D" stroke-width="2"/>${dots}${labels}</svg>`;
+}
+function persona(scores, opts) {
+  const dims = toDims(scores);
+  const bars = `<div class="ps-bars">${dims.map(d => `<div class="ps-bar-row">
+      <div class="ps-bar-head"><span class="ps-name">${esc(d.name)}</span><span class="ps-level">${esc(d.levelText)}</span></div>
+      <div class="ps-bar"><div class="ps-bar-fill" style="width:${d.posPct}%"></div><div class="ps-bar-mid"></div></div>
+      <div class="ps-bar-ends"><span class="${d.lead === 'pos' ? 'ps-on' : ''}">${esc(d.posWord)} ${d.posPct}%</span><span class="${d.lead === 'neg' ? 'ps-on' : ''}">${d.negPct}% ${esc(d.negWord)}</span></div>
+    </div>`).join('')}</div>`;
+  const reads = `<div class="ps-reads">${dims.map(d => `<div class="ps-read"><div class="ps-read-head"><span class="ps-read-name">${esc(d.name)}</span><span class="ps-chip">${esc(d.leadWord)}</span></div><p class="ps-read-text">${esc(d.text)}</p></div>`).join('')}</div>`;
+  return `<div class="ps">${radarSVG(dims)}<div class="ps-note">离中心越远，这一维的倾向越鲜明</div>${bars}${opts && opts.short ? '' : reads}</div>`;
+}
+
+/* ---------- pieces ---------- */
+function stamp(id, size) {
+  const g = C.guests[id];
+  return `<div class="stamp ${size || ''}" style="--c:${g.color}" aria-hidden="true"><div class="face"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[g.icon]}</svg><span class="val">${esc(g.type)}</span></div></div>`;
+}
+function sealedEnvelope() { return `<div class="seal-env"><div class="flap"></div><div class="wax">信</div></div>`; }
+const FOOT = '<p class="disclaimer">趣味测试 · 非官方出品 · 角色解读基于节目公开内容</p>';
+
+/* ---------- screens ---------- */
+function renderHome() {
+  history.replaceState(null, '', baseUrl());
+  const ids = Object.keys(C.guests);
+  const saved = loadMe();
+  app.innerHTML = `<section class="screen slide-in">
+    <div class="envelope"><div class="stamp-slot">${stamp('xufei','sm')}</div><div class="postmark">友情来信<br>寄 出</div>
+      <div class="addr"><small>寄给</small>需要友情的你</div><div class="airmail"></div></div>
+    <div><h1 class="home-title">友情来信</h1><p class="home-sub">寄给朋友的一封信 · 你需要什么样的友情</p></div>
+    <div class="home-meta">16 站旅途情境 · 8 枚嘉宾邮票 · 约 3 分钟</div>
+    <div class="stamp-row" aria-label="8 位嘉宾">${ids.map(id => stamp(id, 'sm')).join('')}</div>
+    <button class="btn btn-primary" id="start-btn" type="button">拆开信封，开始测试</button>
+    ${saved ? '<button class="btn btn-ghost" type="button" id="saved-btn">查看我上次的结果</button>' : ''}
+    ${FOOT}
+  </section>`;
+  document.getElementById('start-btn').onclick = () => { S = freshState(); renderQuiz(); };
+  const sb = document.getElementById('saved-btn');
+  if (sb) sb.onclick = () => { S = freshState(); S.me = saved; renderResult(); };
+}
+
+function renderQuiz() {
+  const i = S.q;
+  if (i > 0 && i % 4 === 0 && !S.interludeShown[i]) return renderInterlude(i);
+  const q = C.questions[i];
+  const order = ORDERS[i % 4];
+  const picked = S.answers[i];
+  const cells = C.questions.map((_, k) => {
+    const a = S.answers[k];
+    const color = a ? C.guests[C.poles[a.axis][a.value > 0 ? 0 : 1]].color : '';
+    return `<i class="${a ? 'on' : ''}" style="${a ? `--c:${color}` : ''}"></i>`;
+  }).join('');
+  app.innerHTML = `<section class="screen">
+    <div class="quiz-top"><div class="progress" aria-label="进度 ${i + 1}/16">${cells}</div><span class="home-meta">${S.mode === 'friend' ? '回信中 · ' : ''}${i + 1} / 16</span></div>
+    <article class="postcard slide-in">
+      <div class="postmark pm-mini">第 ${i + 1} 站<br>${esc(q.place.split(' · ')[0])}</div>
+      <div class="place">${esc(q.place)}</div>
+      <h2 class="question">${esc(q.text)}</h2>
+      <div class="options" role="list">${order.map((oi, k) => {
+        const o = q.options[oi];
+        const on = picked && picked.value === o.value;
+        return `<button type="button" class="option ${on ? 'picked' : ''}" data-v="${o.value}">${esc(o.text)}<span class="chop">${CHOPS[k]}</span></button>`;
+      }).join('')}</div>
+    </article>
+    <div class="quiz-foot"><button class="btn-link" type="button" id="prev-btn" ${i === 0 ? 'disabled style="visibility:hidden"' : ''}>← 上一站</button><span>选好后自动前往下一站</span></div>
+  </section>`;
+  window.scrollTo(0, 0);
+  app.querySelectorAll('.option').forEach(btn => btn.onclick = () => {
+    app.querySelectorAll('.option').forEach(b => b.classList.remove('picked'));
+    btn.classList.add('picked');
+    if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
+    S.answers[i] = { q: i, axis: q.axis, value: Number(btn.dataset.v) };
+    setTimeout(() => { if (S.q === i) { if (i === 15) finishQuiz(); else { S.q++; renderQuiz(); } } }, 320);
+  });
+  document.getElementById('prev-btn').onclick = () => { if (S.q > 0) { S.q--; renderQuiz(); } };
+}
+function renderInterlude(i) {
+  const lines = { 4: ['第一封信已寄出', '你已经走过 4 站，路还长'], 8: ['旅途过半', '风景换了，同行的人还在'], 12: ['快到终点了', '最后 4 站，想想你最在意的那个人'] };
+  const [h, p] = lines[i];
+  app.innerHTML = `<section class="screen"><div class="interlude slide-in"><div class="postmark">第 ${i} 站<br>已盖章</div><h2>${h}</h2><p>${p}</p><button class="btn btn-primary" type="button" id="go-on">继续出发</button></div></section>`;
+  document.getElementById('go-on').onclick = () => { S.interludeShown[i] = true; renderQuiz(); };
+}
+function finishQuiz() {
+  app.innerHTML = `<section class="screen sealing"><div>${sealedEnvelope()}<p class="home-meta">正在封缄你的信…</p></div></section>`;
+  const result = matchGuest(S.answers);
+  saveMe(result);
+  setTimeout(() => {
+    if (S.mode === 'friend') { S.friend = result; S.pair = compat(S.owner, result.scores); renderPair(); }
+    else { S.me = result; renderResult(); }
+  }, 1500);
+}
+
+function guestHead(id, size) {
+  const g = C.guests[id];
+  return `<div class="result-head">${stamp(id, size)}<div class="who"><div class="result-type">${esc(g.type)}</div><div class="result-name">${esc(g.name)} · ${esc(g.group)}</div></div></div>`;
+}
+function renderResult() {
+  history.replaceState(null, '', baseUrl());
+  const r = S.me, g = C.guests[r.guest], healer = C.guests[r.healer], friction = C.guests[r.friction];
+  app.innerHTML = `<section class="screen slide-in">
+    <article class="letter" style="--c:${g.color}">
+      <div class="salute">见字如面。你需要的友情是——</div>
+      ${guestHead(r.guest, 'lg')}
+      <p class="verdict">${esc(g.verdict)}</p>
+      <div class="tags">${g.keywords.map(k => `<span class="tag">${esc(k)}</span>`).join('')}</div>
+      <div class="section-label">你的友情人格维度</div>
+      ${persona(r.scores)}
+      <div class="section-label">你需要的友情说明书</div>
+      <p class="para">${esc(g.need)}</p>
+      <div class="section-label">你的友情盲点</div><p class="para">${esc(g.blind)}</p>
+      <div class="section-label">朋友匹配</div>
+      <div class="match-grid">
+        <div class="match">${stamp(r.healer,'sm')}<div><small>治愈你的朋友</small><b>${esc(healer.type)}</b><span>${esc(healer.name)}式</span></div></div>
+        <div class="match">${stamp(r.friction,'sm')}<div><small>最需磨合的朋友</small><b>${esc(friction.type)}</b><span>${esc(friction.name)}式</span></div></div>
+      </div>
+      <div class="section-label">给你的相处建议</div><ol class="tips">${g.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ol>
+    </article>
+    <button class="btn btn-primary" type="button" id="share-btn">寄给你的朋友，测测你们的契合度</button>
+    <div class="row"><button class="btn btn-ghost" type="button" id="poster-btn">生成结果卡片</button><button class="btn btn-ghost" type="button" id="again-btn">再测一次</button></div>
+    ${FOOT}
+  </section>`;
+  window.scrollTo(0, 0);
+  document.getElementById('share-btn').onclick = () => showShare(inviteUrl(r.scores), '我给你寄了一封信，拆开前先回答 16 个问题', '链接里只有封着的信封。朋友答完能看到你们的契合度，但看不到你是哪位嘉宾。');
+  document.getElementById('poster-btn').onclick = showPoster;
+  document.getElementById('again-btn').onclick = () => { S = freshState(); renderQuiz(); };
+}
+
+function renderInvite() {
+  app.innerHTML = `<section class="screen slide-in"><div class="sealed">
+    ${sealedEnvelope()}
+    <h2>来自朋友的一封信</h2>
+    <p>信已封缄。回答 16 个问题，就能拆开它，看看你们的契合度。</p>
+    <p class="home-meta">你看不到对方是哪位嘉宾，对方也看不到你的。</p>
+    <button class="btn btn-primary" type="button" id="reply-btn" style="width:100%">开始回信</button>
+    <button class="btn-link" type="button" id="own-btn">我只想自己测一测</button>
+  </div></section>`;
+  document.getElementById('reply-btn').onclick = () => { S.q = 0; S.answers = []; S.interludeShown = {}; renderQuiz(); };
+  document.getElementById('own-btn').onclick = () => { S = freshState(); renderHome(); };
+}
+
+function pairLetter(p, a, b, salute) {
+  const near = C.axes[p.closestAxis], far = C.axes[p.farthestAxis];
+  return `<article class="letter">
+      <div class="salute">${salute}</div>
+      <div class="compat"><div class="num">${p.score}<sup>%</sup></div><div class="tier">${esc(p.tier.name)}</div><div class="line">${esc(p.tier.line)}</div></div>
+      <div class="pair-facts">
+        <div class="fact"><small>最同频</small><p>你们在「${near.name}」上最合拍。</p></div>
+        <div class="fact"><small>最不同</small><p>你们在「${far.name}」上差得最远：${esc(far.gap)}。</p></div>
+      </div>
+      <div class="section-label">关系深度解读</div>
+      <div class="pair-facts">${C.axes.map((ax, i) => {
+        const d = Math.abs(a[i] - b[i]);
+        const level = d <= 3 ? '很同频' : d <= 7 ? '有些不同' : '差得很远';
+        return `<div class="fact"><small>${ax.name} · ${level}</small><p>${d <= 3 ? '这件事上你们不用多解释。' : esc(ax.gap) + '。提前说好各自的习惯，会少很多误会。'}</p></div>`;
+      }).join('')}</div>
+    </article>`;
+}
+function renderPair() {
+  history.replaceState(null, '', baseUrl());
+  const p = S.pair, me = S.friend, g = C.guests[me.guest];
+  app.innerHTML = `<section class="screen slide-in">
+    ${pairLetter(p, S.owner, me.scores, '信拆开了。你们的友情契合度是——')}
+    <button class="btn btn-seal" type="button" id="back-btn">把这封回信寄回给 TA</button>
+    <p class="hint">TA 打开回信链接，会看到同样的契合度。双方都看不到对方的嘉宾。</p>
+    <article class="letter" style="--c:${g.color}">
+      <div class="salute">另附：你自己的结果</div>
+      ${guestHead(me.guest)}
+      <p class="verdict" style="font-size:20px">${esc(g.verdict)}</p>
+      ${persona(me.scores, { short: true })}
+    </article>
+    <button class="btn btn-primary" type="button" id="see-full">查看我的完整结果</button>
+    <button class="btn btn-ghost" type="button" id="own-share">也寄一封信给别的朋友</button>
+    ${FOOT}
+  </section>`;
+  window.scrollTo(0, 0);
+  document.getElementById('back-btn').onclick = () => showShare(replyUrl(S.owner, me.scores), '朋友给你回信了，打开看看你们的契合度', '回信里只有你们的契合度，不会透露各自是哪位嘉宾。');
+  const toSelf = () => { S.me = S.friend; S.mode = 'self'; renderResult(); };
+  document.getElementById('see-full').onclick = toSelf;
+  document.getElementById('own-share').onclick = () => { toSelf(); showShare(inviteUrl(me.scores), '我给你寄了一封信，拆开前先回答 16 个问题', '链接里只有封着的信封。朋友答完能看到你们的契合度，但看不到你是哪位嘉宾。'); };
+}
+function renderReply(owner, friend) {
+  const p = compat(owner, friend);
+  const saved = loadMe();
+  app.innerHTML = `<section class="screen slide-in">
+    <div class="sealed">${sealedEnvelope()}<h2>朋友给你回信了</h2></div>
+    ${pairLetter(p, owner, friend, '你们的友情契合度是——')}
+    ${saved ? '<button class="btn btn-ghost" type="button" id="mine-btn">查看我的完整结果</button>' : ''}
+    <button class="btn btn-primary" type="button" id="home-btn">再寄一封信给别的朋友</button>
+    ${FOOT}
+  </section>`;
+  const mb = document.getElementById('mine-btn');
+  if (mb) mb.onclick = () => { S = freshState(); S.me = saved; renderResult(); };
+  document.getElementById('home-btn').onclick = () => {
+    if (saved) { S = freshState(); S.me = saved; renderResult(); }
+    else { S = freshState(); S.me = resultFromScores(owner); saveMe(S.me); renderResult(); }
+  };
+}
+
+/* ---------- overlays ---------- */
+function openOverlay(html) {
+  overlayRoot.innerHTML = `<div class="overlay" role="dialog" aria-modal="true"><div class="sheet">${html}</div></div>`;
+  const ov = overlayRoot.firstElementChild;
+  ov.addEventListener('click', e => { if (e.target === ov) closeOverlay(); });
+  return ov;
+}
+function closeOverlay() { overlayRoot.innerHTML = ''; }
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true; } catch (e) {}
+  const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+  ta.remove(); return ok;
+}
+function showShare(url, title, note) {
+  const text = `${title} ${url}`;
+  const ov = openOverlay(`<div class="section-label">寄出这封信</div>
+    <div class="share-preview"><div class="t">${esc(title)}</div><div class="img">${sealedEnvelope()}</div><div class="from">友情来信 · 网页版</div></div>
+    <input class="share-url" id="share-url" readonly value="${esc(url)}" aria-label="分享链接">
+    <button class="btn btn-primary" type="button" id="copy-btn">复制链接，发给朋友</button>
+    ${navigator.share ? '<button class="btn btn-ghost" type="button" id="native-share">用系统分享</button>' : ''}
+    <p class="hint">${esc(note)}</p>
+    <button class="btn-link" type="button" id="share-close">关闭</button>`);
+  const input = ov.querySelector('#share-url');
+  input.onclick = () => input.select();
+  ov.querySelector('#copy-btn').onclick = async e => {
+    const ok = await copyText(text);
+    e.target.textContent = ok ? '已复制，去微信粘贴给朋友吧' : '复制失败，请长按上面的链接手动复制';
+    if (!ok) input.select();
+  };
+  const ns = ov.querySelector('#native-share');
+  if (ns) ns.onclick = () => navigator.share({ title, text: title, url }).catch(() => {});
+  ov.querySelector('#share-close').onclick = closeOverlay;
+}
+function showPoster() {
+  const r = S.me, g = C.guests[r.guest];
+  const ov = openOverlay(`<div class="poster" style="--c:${g.color}">
+      <div class="salute" style="font-size:12px;color:var(--muted)">我需要的友情是——</div>
+      <div class="result-head">${stamp(r.guest)}<div class="who"><div class="result-type" style="font-size:22px">${esc(g.type)}</div><div class="result-name">${esc(g.name)}</div></div></div>
+      <p class="verdict" style="font-size:19px">${esc(g.verdict)}</p>
+      <div class="tags">${g.keywords.map(k => `<span class="tag">${esc(k)}</span>`).join('')}</div>
+      ${radarSVG(toDims(r.scores))}
+      <div class="poster-foot">友情来信 · 你需要什么样的友情</div>
+    </div>
+    <p class="hint">截图这张卡片，就能发朋友圈或保存。</p>
+    <button class="btn btn-ghost" type="button" id="poster-close">关闭</button>`);
+  ov.querySelector('#poster-close').onclick = closeOverlay;
+}
+
+document.getElementById('reset-btn').onclick = () => { closeOverlay(); S = freshState(); renderHome(); };
+
+(function route() {
+  const qs = new URLSearchParams(location.search);
+  const inv = decScores(qs.get('i'));
+  const rep = qs.get('p');
+  if (inv) { S = freshState(); S.owner = inv; S.mode = 'friend'; return renderInvite(); }
+  if (rep && rep.length === 10) {
+    const a = decScores(rep.slice(0, 5)), b = decScores(rep.slice(5));
+    if (a && b) return renderReply(a, b);
+  }
+  renderHome();
+})();
+</script>
+</body>
+</html>

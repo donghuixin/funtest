@@ -1,0 +1,20 @@
+.ps { display: flex; flex-direction: column; }
+.ps-radar { width: 100%; height: 600rpx; }
+.ps-note { text-align: center; font-size: 22rpx; color: #8A8A8A; letter-spacing: 2rpx; margin-top: 4rpx; }
+.ps-bars { margin-top: 36rpx; background: #FFFDF8; border: 2rpx solid #D9D0C1; padding: 12rpx 32rpx; }
+.ps-bar-row { padding: 24rpx 0; border-bottom: 2rpx dashed #D9D0C1; }
+.ps-bar-row:last-child { border-bottom: 0; }
+.ps-bar-head { display: flex; justify-content: space-between; align-items: baseline; }
+.ps-name { font-size: 28rpx; color: #1F3A5F; font-weight: 600; letter-spacing: 4rpx; }
+.ps-level { font-size: 22rpx; color: #C8452D; }
+.ps-bar { position: relative; height: 14rpx; margin: 20rpx 0 14rpx; background: #E6DED0; border-radius: 14rpx; overflow: hidden; }
+.ps-bar-fill { position: absolute; left: 0; top: 0; bottom: 0; background: #1F3A5F; border-radius: 14rpx 0 0 14rpx; }
+.ps-bar-mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 2rpx; background: #FBF8F2; }
+.ps-bar-ends { display: flex; justify-content: space-between; font-size: 22rpx; color: #8A8A8A; }
+.ps-on { color: #1F3A5F; font-weight: 600; }
+.ps-reads { margin-top: 12rpx; }
+.ps-read { padding: 32rpx 0 4rpx; }
+.ps-read-head { display: flex; align-items: center; gap: 16rpx; margin-bottom: 12rpx; }
+.ps-read-name { font-size: 30rpx; font-weight: 700; color: #1F3A5F; font-family: "LetterDisplay", "Songti SC", serif; }
+.ps-chip { font-size: 20rpx; color: #C8452D; border: 2rpx solid #C8452D; border-radius: 6rpx; padding: 0 12rpx; line-height: 1.6; }
+.ps-read-text { font-size: 28rpx; line-height: 1.85; color: #33465F; }

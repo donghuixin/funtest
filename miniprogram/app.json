@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/quiz/index",
+    "pages/result/index",
+    "pages/invite/index",
+    "pages/pair/index",
+    "pages/history/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#F4EFE6",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "友情来信",
+    "backgroundColor": "#F4EFE6",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

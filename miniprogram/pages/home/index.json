@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "友情来信",
+  "usingComponents": {
+    "stamp": "/components/stamp/index"
+  }
+}

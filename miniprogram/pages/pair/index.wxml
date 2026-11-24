@@ -1,0 +1,38 @@
+<view class="wrap" wx:if="{{ready}}">
+  <view class="sheet">
+    <view class="muted">信拆开了。你们的友情契合度是——</view>
+    <view class="compat">
+      <view class="num display">{{score}}<text class="pct">%</text></view>
+      <view class="tier display">{{tier}}</view>
+      <view class="line">{{tierLine}}</view>
+    </view>
+    <view class="fact"><view class="label">最同频</view><view>你们在「{{near}}」上最合拍。</view></view>
+    <view class="fact"><view class="label">最不同</view><view>你们在「{{far}}」上差得最远：{{farGap}}。</view></view>
+
+    <view class="label">关系深度解读</view>
+    <view class="{{unlocked ? '' : 'locked'}}">
+      <view class="{{unlocked ? 'facts' : 'facts blur'}}">
+        <view class="fact" wx:for="{{facts}}" wx:key="name"><view class="label">{{item.name}} · {{item.level}}</view><view>{{item.text}}</view></view>
+      </view>
+      <view class="unlock-card" wx:if="{{!unlocked}}">
+        <button class="btn btn-seal" hover-class="btn-hover" bindtap="unlockPair">看一段广告，解锁关系解读</button>
+        <view class="muted">四条光谱逐条对比，不会透露对方的嘉宾</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="sheet" wx:if="{{mine}}">
+    <view class="muted">另附：你自己的结果</view>
+    <view class="head">
+      <stamp guest="{{mine.id}}" />
+      <view class="who"><view class="display t">{{mine.type}}</view><view class="muted" wx:if="{{mine.displayName}}">{{mine.displayName}}</view></view>
+    </view>
+    <view class="verdict">{{mine.verdict}}</view>
+    <spectrum scores="{{myScores}}" />
+    <button class="btn btn-ghost" hover-class="btn-hover" bindtap="seeMine">查看我的完整结果，也寄一封给朋友</button>
+  </view>
+
+  <button wx:if="{{role === 'owner'}}" class="btn btn-ghost" hover-class="btn-hover" bindtap="openHistory">回到我的信箱</button>
+  <button wx:if="{{!mine && role === 'friend'}}" class="btn btn-primary" hover-class="btn-hover" bindtap="startOwn">自己测一测</button>
+  <view class="disclaimer">趣味测试 · 非官方出品</view>
+</view>

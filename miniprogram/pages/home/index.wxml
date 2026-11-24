@@ -1,0 +1,19 @@
+<view class="wrap">
+  <view class="envelope">
+    <view class="lines"></view>
+    <view class="corner"><stamp guest="xufei" size="sm" /></view>
+    <view class="postmark pm">友情来信\n寄 出</view>
+    <view class="addr"><text class="muted">寄给</text><text class="to">需要友情的你</text></view>
+    <view class="airmail"></view>
+  </view>
+  <view>
+    <view class="display title">友情来信</view>
+    <view class="sub">寄给朋友的一封信 · 你需要什么样的友情</view>
+  </view>
+  <view class="muted">16 站旅途情境 · 8 枚嘉宾邮票 · 约 3 分钟</view>
+  <view class="stamps"><stamp wx:for="{{guests}}" wx:key="*this" guest="{{item}}" size="sm" /></view>
+  <button class="btn btn-primary" hover-class="btn-hover" bindtap="start">拆开信封，开始测试</button>
+  <button wx:if="{{hasDraft}}" class="btn btn-ghost" hover-class="btn-hover" bindtap="resume">继续上次没走完的旅程</button>
+  <button class="btn btn-ghost" hover-class="btn-hover" bindtap="openHistory">我的信箱</button>
+  <view class="disclaimer">趣味测试 · 非官方出品 · 角色解读基于节目公开内容</view>
+</view>

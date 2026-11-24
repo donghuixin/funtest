@@ -1,0 +1,10 @@
+.envelope { position: relative; background: var(--white); border: 2rpx solid var(--rule); height: 470rpx; overflow: hidden; box-shadow: 0 20rpx 60rpx -36rpx rgba(31,58,95,.5); }
+.lines { position: absolute; left: 0; right: 0; top: 0; height: 62%; background: linear-gradient(to bottom right, transparent 49.6%, #D9D0C1 49.8%, transparent 50.2%), linear-gradient(to bottom left, transparent 49.6%, #D9D0C1 49.8%, transparent 50.2%); }
+.corner { position: absolute; right: 36rpx; top: 36rpx; }
+.pm { position: absolute; right: 120rpx; top: 90rpx; white-space: pre-line; }
+.addr { position: absolute; left: 44rpx; bottom: 60rpx; display: flex; flex-direction: column; }
+.to { font-family: var(--f-display); font-size: 44rpx; letter-spacing: 6rpx; }
+.airmail { position: absolute; left: 0; right: 0; bottom: 0; height: 16rpx; background: repeating-linear-gradient(-45deg, #C8452D 0 20rpx, #FFFDF8 20rpx 40rpx, #1F3A5F 40rpx 60rpx, #FFFDF8 60rpx 80rpx); }
+.title { font-size: 80rpx; letter-spacing: 16rpx; line-height: 1.2; }
+.sub { font-family: var(--f-display); font-size: 34rpx; color: var(--ink-soft); margin-top: 8rpx; }
+.stamps { display: flex; gap: 12rpx; flex-wrap: wrap; }

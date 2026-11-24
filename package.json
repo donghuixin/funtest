@@ -1,0 +1,18 @@
+{
+  "name": "friendship-letter",
+  "private": true,
+  "version": "1.0.0",
+  "description": "后会有期 友情测试 微信小程序",
+  "scripts": {
+    "sync": "node scripts/sync.js",
+    "demo": "node scripts/build-demo.js",
+    "typecheck": "npm run sync && tsc -p tsconfig.json",
+    "test": "npm run sync && node --test tests/scoring.test.js",
+    "upload": "npm run sync && node scripts/upload.js"
+  },
+  "devDependencies": {
+    "miniprogram-api-typings": "3.12.2",
+    "miniprogram-ci": "1.9.16",
+    "typescript": "5.4.5"
+  }
+}

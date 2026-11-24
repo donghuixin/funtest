@@ -1,0 +1,25 @@
+<view class="ps">
+  <canvas type="2d" id="ps-radar" class="ps-radar"></canvas>
+  <view class="ps-note">离中心越远，这一维的倾向越鲜明</view>
+
+  <view class="ps-bars">
+    <view wx:for="{{dims}}" wx:key="name" class="ps-bar-row">
+      <view class="ps-bar-head">
+        <text class="ps-name">{{item.name}}</text>
+        <text class="ps-level">{{item.levelText}}</text>
+      </view>
+      <view class="ps-bar"><view class="ps-bar-fill" style="width:{{item.posPct}}%"></view><view class="ps-bar-mid"></view></view>
+      <view class="ps-bar-ends">
+        <text class="{{item.lead === 'pos' ? 'ps-on' : ''}}">{{item.posWord}} {{item.posPct}}%</text>
+        <text class="{{item.lead === 'neg' ? 'ps-on' : ''}}">{{item.negPct}}% {{item.negWord}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="ps-reads">
+    <view wx:for="{{dims}}" wx:key="name" class="ps-read">
+      <view class="ps-read-head"><text class="ps-read-name">{{item.name}}</text><text class="ps-chip">{{item.leadWord}}</text></view>
+      <view class="ps-read-text">{{item.text}}</view>
+    </view>
+  </view>
+</view>

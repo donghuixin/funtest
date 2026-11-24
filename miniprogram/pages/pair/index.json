@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "你们的契合度",
+  "usingComponents": {
+    "stamp": "/components/stamp/index",
+    "spectrum": "/components/spectrum/index"
+  }
+}
